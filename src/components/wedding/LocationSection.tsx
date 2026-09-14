@@ -14,7 +14,7 @@ export const LocationSection: React.FC = () => {
   const [isZoomed, setIsZoomed] = useState(false);
 
   const addressText = 'Dusun Tempel, RT.25/RW.06, Plumbon, Kec. Suruh, Kab. Semarang, Jawa Tengah';
-  const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=Dusun+Tempel+Plumbon+Kecamatan+Suruh+Kabupaten+Semarang';
+  const mapsUrl = 'https://maps.app.goo.gl/K5a9sDrD8DjxG3V76';
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(addressText);
