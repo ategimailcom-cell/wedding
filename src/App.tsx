@@ -3,7 +3,6 @@ import CoverModal from './components/wedding/CoverModal';
 import HeroSection from './components/wedding/HeroSection';
 import StorySection from './components/wedding/StorySection';
 import LocationSection from './components/wedding/LocationSection';
-import MusicPlayer from './components/wedding/MusicPlayer';
 import BottomNav from './components/wedding/BottomNav';
 import FloatingPetals from './components/wedding/FloatingPetals';
 import type { WeddingSection } from './components/wedding/types';
@@ -64,11 +63,11 @@ export function App() {
       {isOpened && (
         <>
           <FloatingPetals />
-          <MusicPlayer autoPlayTrigger={audioTrigger} />
           <BottomNav
             activeSection={activeSection}
             onNavigate={setActiveSection}
             onCloseInvitation={handleCloseInvitation}
+            autoPlayTrigger={audioTrigger}
           />
         </>
       )}
