@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useTransform, useMotionValue, useSpring } from 'framer-motion';
 
 interface StoryStep {
   period: string;
@@ -73,13 +73,39 @@ export const StorySection: React.FC<{ scrollContainer: React.RefObject<HTMLDivEl
     return () => ro.disconnect();
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: listRef,
-    container: scrollContainer,
-    offset: ['start 10%', 'end 50%'],
-  });
-  const fillH = useTransform(scrollYProgress, [0, 0.85], [0, fillMax]);
-  const fillO = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+  // Lacak scroll manual (tanpa useScroll framer) — deterministik di dev & prod
+  const rawProgress = useMotionValue(0);
+  useEffect(() => {
+    const sc = scrollContainer.current;
+    const list = listRef.current;
+    if (!sc || !list) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const c = sc.getBoundingClientRect();
+      const t = list.getBoundingClientRect();
+      const startLine = c.top + c.height * 0.1;
+      const endLine = c.top + c.height * 0.5;
+      const total = startLine - (endLine - t.height);
+      if (total <= 0) return;
+      const p = (startLine - t.top) / total;
+      rawProgress.set(Math.min(1, Math.max(0, p)));
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    sc.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      sc.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [scrollContainer, rawProgress]);
+  const journey = useSpring(rawProgress, { stiffness: 120, damping: 24 });
+  const fillH = useTransform(journey, [0, 0.85], [0, fillMax]);
+  const fillO = useTransform(journey, [0, 0.1], [0, 1]);
 
   return (
     <section id="kisah" className="relative overflow-hidden px-5 pb-16 pt-12">
