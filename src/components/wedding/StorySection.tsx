@@ -1,11 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Heart, Sparkles, Compass, ShieldCheck, Gem, Infinity as InfinityIcon } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface StoryStep {
   period: string;
   title: string;
-  icon: React.ReactNode;
   content: string;
 }
 
@@ -13,138 +11,193 @@ const stories: StoryStep[] = [
   {
     period: 'Awal 2023',
     title: 'Pertemuan yang Tenang',
-    icon: <Compass className="w-5 h-5 text-gold-500" />,
     content:
       'Awalnya hanya sebuah kebetulan yang tenang. Saya Yusuf mengenal Faragita di awal tahun 2023 lewat sebuah dialog sederhana saat mencari rekan kerja, yang ternyata membuka jalan bagi dua takdir untuk saling menyapa. Di antara tumpukan tugas dan intensitas komunikasi yang perlahan menghangat, hadir rasa yang tak pernah kami rencanakan. Dari sekadar teman bertukar kabar, dia perlahan tumbuh menjadi tempat paling nyaman untuk pulang.',
   },
   {
     period: 'Agustus 2023',
     title: 'Memilih Berjalan Beriringan',
-    icon: <Heart className="w-5 h-5 text-gold-500" />,
     content:
       'Pada Agustus 2023, rasa itu akhirnya menemukan keberaniannya. Tanpa ada kata “iya” yang terucap secara resmi, kami memilih berjalan beriringan. Kami biarkan waktu dan ketulusan tindakan yang menjadi penanda bahwa kami serius menjalani arah cerita ini.',
   },
   {
     period: 'Masa Perjuangan',
     title: 'Belajar Saling Menopang',
-    icon: <ShieldCheck className="w-5 h-5 text-gold-500" />,
     content:
       'Ujian pertama datang saat ia memberanikan diri merintis jalannya sendiri. Di sanalah kisah kami benar-benar ditempa. Melihatnya jatuh bangun membangun usaha—menatap lelah di matanya dan air mata yang kerap ia sembunyikan rapat-rapat—membuat dada ini berdesir haru. Di titik itulah saya sadar, cinta bukan cuma tentang berbagi tawa, melainkan tentang keberanian untuk saling menopang saat hidup menguji jiwa.',
   },
   {
     period: 'Juni 2025',
     title: 'Mengikat Janji',
-    icon: <Gem className="w-5 h-5 text-gold-500" />,
     content:
       'Hingga akhirnya pada Juni 2025, kami memilih untuk saling mengikat janji. Sebuah cincin sederhana hadir sebagai saksi tekad kami untuk melangkah lebih jauh. Meski masa tunangan kembali menguji dengan berbagai lika-liku, kami belajar bahwa tak ada badai yang terlalu besar selama kami saling bergandengan tangan.',
   },
   {
     period: 'Oktober 2026',
     title: 'Satu Tujuan, Selamanya',
-    icon: <InfinityIcon className="w-5 h-5 text-gold-500" />,
     content:
       'Dan di bulan Oktober 2026 ini, dua jiwa yang dulu saling tak mau kalah, akhirnya menundukkan ego masing-masing untuk satu tujuan yang sama—berjalan bersama sebagai sepasang suami istri.',
   },
 ];
 
-export const StorySection: React.FC = () => {
-  return (
-    <section id="kisah" className="relative py-20 px-4 sm:px-6 overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -right-32 w-80 h-80 bg-emerald-700/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 -left-32 w-80 h-80 bg-gold-500/10 rounded-full blur-3xl"></div>
-      </div>
+export const StorySection: React.FC<{ scrollContainer: React.RefObject<HTMLDivElement> }> = ({
+  scrollContainer,
+}) => {
+  const listRef = useRef<HTMLDivElement>(null);
+  const lastDotRef = useRef<HTMLSpanElement>(null);
+  const [lineH, setLineH] = useState(0);
+  const [fillMax, setFillMax] = useState(0);
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+  useEffect(() => {
+    const el = listRef.current;
+    if (!el) return;
+    const measure = () => {
+      // offsetHeight/offsetTop: posisi layout murni, tak terpengaruh animasi transform
+      setLineH(el.offsetHeight);
+      const dot = lastDotRef.current;
+      if (dot) {
+        let y = 0;
+        let node: HTMLElement | null = dot;
+        while (node && node !== el) {
+          y += node.offsetTop;
+          node = node.offsetParent as HTMLElement | null;
+        }
+        // Ujung garis diselipkan 4px di balik tepi atas kupat — tanpa gap, tanpa timpa
+        setFillMax(y + 4);
+      }
+    };
+    measure();
+    if (document.fonts) document.fonts.ready.then(() => measure()).catch(() => {});
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: listRef,
+    container: scrollContainer,
+    offset: ['start 10%', 'end 50%'],
+  });
+  const fillH = useTransform(scrollYProgress, [0, 0.85], [0, fillMax]);
+  const fillO = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+
+  return (
+    <section id="kisah" className="relative overflow-hidden px-5 pb-16 pt-12">
+      <div className="relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="mb-10 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.55 }}
           >
-            <span className="font-cinzel text-xs tracking-[0.3em] uppercase text-gold-400 font-semibold px-4 py-1.5 rounded-full border border-gold-400/30 bg-emerald-950/60 inline-block mb-3">
-              Our Love Story
-            </span>
-            <h2 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-gold-200 tracking-wide">
+            <div className="mb-3 flex items-center justify-center gap-3">
+              <span className="h-px w-8 bg-gold-400/50" />
+              <span className="font-cinzel text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-400">
+                Our Love Story
+              </span>
+              <span className="h-px w-8 bg-gold-400/50" />
+            </div>
+            <h2 className="font-playfair text-[27px] font-bold leading-snug tracking-wide text-gold-200">
               Bukan Tentang Siapa yang Menang
             </h2>
-            <p className="font-cormorant italic text-stone-300 text-base sm:text-lg max-w-lg mx-auto mt-2">
+            <p className="mx-auto mt-2 max-w-[32ch] font-cormorant text-[17px] italic leading-relaxed text-stone-300">
               Ini cerita singkat perjalanan dua hati menuju ikatan suci pernikahan.
             </p>
+            <div className="mt-5 flex items-center justify-center gap-2.5" aria-hidden>
+              <span className="h-px w-14 bg-gradient-to-r from-transparent to-gold-400/60" />
+              <span className="block h-1.5 w-1.5 rotate-45 bg-gold-400/80" />
+              <span className="h-px w-14 bg-gradient-to-l from-transparent to-gold-400/60" />
+            </div>
           </motion.div>
         </div>
 
-        {/* Timeline Container */}
-        <div className="relative">
-          {/* Central Golden Line (desktop) */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-4 bottom-4 w-[2px] bg-gradient-to-b from-transparent via-gold-500/50 to-transparent"></div>
-
-          {/* Timeline Cards */}
-          <div className="space-y-8 sm:space-y-12">
+        {/* Timeline — titik sticky + garis isi setinggi daftar */}
+        <div ref={listRef} className="relative">
+          <div className="space-y-8">
             {stories.map((story, index) => {
-              const isEven = index % 2 === 0;
+              const isLast = index === stories.length - 1;
               return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: index * 0.1 }}
-                  className={`relative flex flex-col md:flex-row items-center ${
-                    isEven ? 'md:flex-row' : 'md:flex-row-reverse'
-                  } gap-6 md:gap-12`}
-                >
-                  {/* Timeline Badge in Center */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-emerald-950 border-2 border-gold-400 items-center justify-center shadow-lg z-10">
-                    {story.icon}
+                <div key={index} className="flex items-start gap-3">
+                  {/* Kolom titik — center mengikuti tinggi isi tiap kartu */}
+                  <div className="relative z-10 flex w-7 shrink-0 items-center justify-center self-stretch">
+                    <span
+                      aria-hidden
+                      ref={isLast ? lastDotRef : undefined}
+                      className={`rotate-45 border ring-4 ring-emerald-950 ${
+                        isLast
+                          ? 'h-4 w-4 border-gold-200 bg-gold-300 shadow-[0_0_16px_rgba(212,175,55,0.95)]'
+                          : 'h-4 w-4 border-gold-300 bg-gold-400'
+                      }`}
+                    />
                   </div>
 
-                  {/* Story Card */}
-                  <div className="w-full md:w-1/2">
-                    <div className="parchment-card rounded-3xl p-6 sm:p-8 border border-gold-400/40 shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all">
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="font-cinzel text-xs uppercase tracking-widest text-emerald-950 bg-gold-400/20 px-3 py-1 rounded-full font-bold border border-gold-400/30">
+                  {/* Kartu */}
+                  <motion.div
+                    className="min-w-0 flex-1"
+                    initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
+                    whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    viewport={{ once: true, amount: 0.35 }}
+                    transition={{ duration: 0.55 }}
+                  >
+                    <div className="parchment-card rounded-[20px] p-5">
+                      <div className="mb-2.5 flex items-center gap-2">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-gold-400/30 bg-gold-400/20 px-3 py-1 font-cinzel text-[10.5px] font-bold uppercase tracking-widest text-emerald-950">
                           {story.period}
                         </span>
-                        <div className="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-emerald-900/10 border border-gold-400/40">
-                          {story.icon}
-                        </div>
+                        <span className="ml-auto font-playfair text-[15px] italic text-gold-700">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
                       </div>
 
-                      <h3 className="font-playfair text-xl sm:text-2xl font-bold text-emerald-950 mb-3">
+                      <h3 className="mb-2 font-playfair text-[19px] font-bold leading-snug text-emerald-950">
                         {story.title}
                       </h3>
 
-                      <p className="font-cormorant text-base sm:text-lg text-stone-800 leading-relaxed italic text-justify">
+                      <p
+                        className={`font-cormorant text-[16.5px] italic leading-[1.7] text-stone-700 ${
+                          index === 0
+                            ? 'first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:font-playfair first-letter:text-[42px] first-letter:font-bold first-letter:leading-[0.85] first-letter:text-gold-700 first-letter:not-italic'
+                            : ''
+                        }`}
+                      >
                         “{story.content}”
                       </p>
                     </div>
-                  </div>
-
-                  {/* Spacer for other column in desktop */}
-                  <div className="hidden md:block w-1/2"></div>
-                </motion.div>
+                  </motion.div>
+                </div>
               );
             })}
           </div>
+
+          {/* Rel — setinggi daftar, ujung memudar */}
+          <div
+            aria-hidden
+            className="absolute left-[13px] top-0 w-[2px]"
+            style={{ height: lineH ? `${lineH}px` : undefined }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold-500/40 to-transparent [mask-image:linear-gradient(to_bottom,transparent_0%,black_12%,black_88%,transparent_100%)]" />
+            <motion.div
+              className="absolute inset-x-0 top-0 rounded-full bg-gradient-to-b from-gold-200 via-gold-400 to-gold-600 shadow-[0_0_8px_rgba(212,175,55,0.65)]"
+              style={{ height: fillH, opacity: fillO }}
+            />
+          </div>
         </div>
 
-        {/* Story Closing */}
+        {/* Penutup */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mt-14 text-center parchment-card rounded-2xl p-6 border border-gold-400/30"
+          transition={{ duration: 0.6 }}
+          className="parchment-card mt-8 rounded-[20px] border border-gold-400/30 p-6 text-center"
         >
-          <Sparkles className="w-6 h-6 text-gold-600 mx-auto mb-2" />
-          <p className="font-cormorant italic text-base sm:text-lg text-emerald-950 font-semibold">
+          <div className="gold-divider mx-auto mb-4 w-24"></div>
+          <p className="font-cormorant text-[17px] font-semibold italic leading-relaxed text-emerald-950">
             “Terima kasih sudah membaca setitik dari jutaan titik kisah kami berdua.”
           </p>
-          <span className="font-alex text-gold-600 text-xl block mt-2">— Yusuf & Fara —</span>
+          <span className="mt-2 block font-alex text-[22px] text-gold-600">— Yusuf & Fara —</span>
         </motion.div>
       </div>
     </section>

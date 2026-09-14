@@ -93,11 +93,11 @@ export const CoverModal: React.FC<CoverModalProps> = ({
               className="absolute bottom-0 left-0 top-0 z-20 w-1/2 origin-left will-change-transform"
               initial={false}
               animate={{
-                x: doorsOpen ? '-110%' : '0%',
-                rotateY: doorsOpen ? -38 : 0,
+                rotateY: doorsOpen ? -104 : 0,
+                filter: doorsOpen ? 'brightness(0.6)' : 'brightness(1)',
               }}
               transition={{ duration: DOOR_MS / 1000, ease: [0.65, 0, 0.35, 1] }}
-              style={{ transformStyle: 'preserve-3d' }}
+              style={{ transformStyle: 'preserve-3d', backfaceVisibility: 'hidden' }}
             >
               <div className="relative h-full w-full">
                 <img
@@ -146,12 +146,13 @@ export const CoverModal: React.FC<CoverModalProps> = ({
               className="absolute bottom-0 right-0 z-20 w-1/2 origin-right will-change-transform"
               initial={false}
               animate={{
-                x: doorsOpen ? '110%' : '0%',
-                rotateY: doorsOpen ? 38 : 0,
+                rotateY: doorsOpen ? 104 : 0,
+                filter: doorsOpen ? 'brightness(0.6)' : 'brightness(1)',
               }}
               transition={{ duration: DOOR_MS / 1000, ease: [0.65, 0, 0.35, 1] }}
               style={{
                 transformStyle: 'preserve-3d',
+                backfaceVisibility: 'hidden',
                 top: '7.5%',
               }}
             >
@@ -188,15 +189,21 @@ export const CoverModal: React.FC<CoverModalProps> = ({
                   whileTap={{ scale: 0.9 }}
                 >
                   <motion.span
-                    className="relative flex h-14 w-14 items-center justify-center sm:h-16 sm:w-16"
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{ repeat: Infinity, duration: 2.6, ease: 'easeInOut' }}
+                    className="relative flex h-20 w-20 items-center justify-center sm:h-24 sm:w-24"
+                    animate={{ y: [0, -8, 0], scale: [1, 1.08, 1] }}
+                    transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
                   >
-                    <span className="absolute inset-0 rounded-full bg-[#e8b84a]/25 blur-md" />
+                    {/* Ring pulse — penanda bisa dipencet */}
+                    <motion.span
+                      className="absolute inset-0 rounded-full border-2 border-[#e8b84a]"
+                      animate={{ scale: [1, 1.28, 1], opacity: [0.8, 0.25, 0.8] }}
+                      transition={{ repeat: Infinity, duration: 2.4, ease: 'easeInOut' }}
+                    />
+                    <span className="absolute inset-0 rounded-full bg-[#e8b84a]/30 blur-md" />
                     <img
                       src="/assets/wedding/3.png"
                       alt=""
-                      className="relative z-10 h-11 w-11 object-contain drop-shadow-[0_5px_12px_rgba(0,0,0,0.55)] sm:h-12 sm:w-12"
+                      className="relative z-10 h-16 w-16 object-contain drop-shadow-[0_5px_12px_rgba(0,0,0,0.55)] sm:h-[4.5rem] sm:w-[4.5rem]"
                     />
                   </motion.span>
                 </motion.button>

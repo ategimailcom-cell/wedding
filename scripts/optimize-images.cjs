@@ -3,7 +3,7 @@
  * Mengkonversi ke WebP dan AVIF untuk performa maksimal
  * 
  * Install dependencies:
- * npm install sharp --save-dev
+ * pnpm add -D sharp
  * 
  * Usage:
  * node scripts/optimize-images.js

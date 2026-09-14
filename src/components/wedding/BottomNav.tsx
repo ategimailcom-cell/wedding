@@ -21,7 +21,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   onCloseInvitation,
 }) => {
   return (
-    <div className="pointer-events-none fixed bottom-3 left-0 right-0 z-50 flex justify-center sm:bottom-4">
+    <div className="pointer-events-none fixed bottom-20 left-0 right-0 z-50 flex justify-center sm:bottom-24">
       <motion.nav
         initial={{ y: 24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

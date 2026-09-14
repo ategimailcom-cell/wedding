@@ -23,19 +23,13 @@
     overflow-x: hidden;
   }
 
-  /* Custom subtle scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
+  /* Sembunyikan scrollbar biar clean — scroll tetap jalan */
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  ::-webkit-scrollbar-track {
-    background: #061910;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #d4af37;
-    border-radius: 3px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #f5e7a9;
+  *::-webkit-scrollbar {
+    display: none;
   }
 }
 

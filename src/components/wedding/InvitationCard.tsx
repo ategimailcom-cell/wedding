@@ -69,13 +69,13 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
       {/* ── Frame kotak penuh + "We will wait for you" di garis atas (kanan) & bawah (kiri) ── */}
       <div
         className="pointer-events-none absolute z-[20]"
-        style={{ top: 22, bottom: 22, left: 16, right: 16 }}
+        style={{ top: 32, bottom: 32, left: 22, right: 22 }}
       >
         {/* stub vertikal — putus di tengah, hanya di sudut */}
-        <div style={{ position: 'absolute', left: 0, top: 0, height: 64, width: 1, background: '#1a1a1a' }} />
-        <div style={{ position: 'absolute', left: 0, bottom: 0, height: 64, width: 1, background: '#1a1a1a' }} />
-        <div style={{ position: 'absolute', right: 0, top: 0, height: 64, width: 1, background: '#1a1a1a' }} />
-        <div style={{ position: 'absolute', right: 0, bottom: 0, height: 64, width: 1, background: '#1a1a1a' }} />
+        <div style={{ position: 'absolute', left: 0, top: 0, height: 120, width: 1, background: '#1a1a1a' }} />
+        <div style={{ position: 'absolute', left: 0, bottom: 0, height: 120, width: 1, background: '#1a1a1a' }} />
+        <div style={{ position: 'absolute', right: 0, top: 0, height: 120, width: 1, background: '#1a1a1a' }} />
+        <div style={{ position: 'absolute', right: 0, bottom: 0, height: 120, width: 1, background: '#1a1a1a' }} />
 
         {/* sisi atas: garis panjang + teks (kanan) */}
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, display: 'flex', alignItems: 'center', height: 0 }}>
@@ -83,13 +83,13 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
           <span
             style={{
               fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 11,
+              fontSize: 13,
               fontStyle: 'italic',
               color: '#c8a43a',
               letterSpacing: 0.5,
               whiteSpace: 'nowrap',
               lineHeight: 1,
-              padding: '0 8px',
+              padding: '0 16px',
             }}
           >
             We will wait for you
@@ -103,13 +103,13 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
           <span
             style={{
               fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 11,
+              fontSize: 13,
               fontStyle: 'italic',
               color: '#c8a43a',
               letterSpacing: 0.5,
               whiteSpace: 'nowrap',
               lineHeight: 1,
-              padding: '0 8px',
+              padding: '0 16px',
             }}
           >
             We will wait for you
@@ -123,9 +123,17 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
       ══════════════════════════════════════ */}
       <div
         className="relative z-[10] flex h-full min-h-0 flex-col items-center"
-        style={{ padding: '76px 20px 28px 20px', gap: 0 }}
+        style={{ padding: '40px 20px', gap: 0, overflowY: 'auto' }}
       >
-
+        <div
+          style={{
+            margin: 'auto 0',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
         {/* Bismillah */}
         <p
           dir="rtl"
@@ -368,6 +376,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
           Hormat Kami,<br />
           Keluarga Besar Sutrisno, Tri gatu, Tri Widyati, Faragita
         </p>
+        </div>
       </div>
     </div>
   );

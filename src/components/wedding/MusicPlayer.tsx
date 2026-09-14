@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Music, Volume2, VolumeX, Disc } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { VolumeX, Disc } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface MusicPlayerProps {
   autoPlayTrigger: boolean;
@@ -39,7 +39,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlayTrigger }) => 
     <>
       <audio
         ref={audioRef}
-        src="/music/IU - Love wins all.mp3"
+        src="/music/pawestri.mp3"
         loop
         preload="auto"
       />
