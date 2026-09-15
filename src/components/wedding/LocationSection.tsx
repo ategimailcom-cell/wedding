@@ -17,7 +17,7 @@ export const LocationSection: React.FC = () => {
   const mapsUrl = 'https://maps.app.goo.gl/K5a9sDrD8DjxG3V76';
 
   const handleCopyAddress = () => {
-    navigator.clipboard.writeText(addressText);
+    navigator.clipboard.writeText(mapsUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
