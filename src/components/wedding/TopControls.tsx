@@ -1,0 +1,82 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { Mail, Music } from 'lucide-react';
+
+interface TopControlsProps {
+  onCloseInvitation?: () => void;
+  autoPlayTrigger: boolean;
+}
+
+/** Tutup undangan (kiri atas) + musik latar (kanan atas) — sejajar bingkai kartu */
+export const TopControls: React.FC<TopControlsProps> = ({ onCloseInvitation, autoPlayTrigger }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (autoPlayTrigger && audioRef.current) {
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false));
+    }
+  }, [autoPlayTrigger]);
+
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => {});
+    }
+  };
+
+  return (
+    <>
+      <audio ref={audioRef} src="/music/pawestri.mp3" loop preload="auto" />
+      <motion.div
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.4 }}
+        className="pointer-events-none fixed left-1/2 top-4 z-50 flex w-full max-w-[420px] -translate-x-1/2 items-start justify-between px-4"
+      >
+        {onCloseInvitation ? (
+          <button
+            type="button"
+            onClick={onCloseInvitation}
+            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-gold-400/40 bg-emerald-950/90 text-gold-300 shadow-xl backdrop-blur-md transition-transform hover:scale-105 active:scale-95"
+            title="Tutup Undangan"
+            aria-label="Tutup Undangan"
+          >
+            <Mail className="h-5 w-5" strokeWidth={1.75} />
+          </button>
+        ) : (
+          <span />
+        )}
+        <button
+          type="button"
+          onClick={togglePlay}
+          className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-gold-400/40 bg-emerald-950/90 shadow-xl backdrop-blur-md transition-transform hover:scale-105 active:scale-95"
+          title={isPlaying ? 'Matikan Musik' : 'Putar Musik'}
+          aria-label="Toggle Music"
+        >
+          {isPlaying ? (
+            <motion.span
+              animate={{ scale: [1, 1.18, 1] }}
+              transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+            >
+              <Music className="h-5 w-5 text-gold-300" strokeWidth={1.75} />
+            </motion.span>
+          ) : (
+            <Music className="h-5 w-5 text-stone-400" strokeWidth={1.75} />
+          )}
+        </button>
+      </motion.div>
+    </>
+  );
+};
+
+export default TopControls;
