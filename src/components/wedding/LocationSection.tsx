@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navigation, Copy, Check, ExternalLink, ZoomIn, X } from 'lucide-react';
 
@@ -177,7 +178,8 @@ export const LocationSection: React.FC = () => {
       </div>
 
       {/* LIGHTBOX MODAL FOR ZOOMED MAP */}
-      <AnimatePresence>
+      {createPortal(
+        <AnimatePresence>
         {isZoomed && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -208,7 +210,9 @@ export const LocationSection: React.FC = () => {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 };
