@@ -71,13 +71,7 @@ export const TopControls: React.FC<TopControlsProps> = ({ onCloseInvitation, aut
               <Music className="h-5 w-5 text-gold-300" strokeWidth={1.75} />
             </motion.span>
           ) : (
-            <span className="relative z-10">
-              <Music className="h-5 w-5 text-stone-400" strokeWidth={1.75} />
-              <X
-                className="absolute -bottom-1.5 -right-1.5 h-4 w-4 rounded-full bg-emerald-950 text-stone-400"
-                strokeWidth={2.5}
-              />
-            </span>
+            <Music className="relative z-10 h-5 w-5 text-stone-400" strokeWidth={1.75} />
           )}
         </button>
       </motion.div>
