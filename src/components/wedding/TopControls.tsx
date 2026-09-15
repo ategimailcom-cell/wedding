@@ -47,11 +47,11 @@ export const TopControls: React.FC<TopControlsProps> = ({ onCloseInvitation, aut
           <button
             type="button"
             onClick={onCloseInvitation}
-            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-gold-400/40 bg-emerald-950/90 text-gold-300 shadow-xl backdrop-blur-md transition-transform hover:scale-105 active:scale-95"
+            className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-gold-400/40 bg-emerald-950/90 text-gold-300 shadow-xl backdrop-blur-md transition-transform hover:scale-105 active:scale-95"
             title="Tutup Undangan"
             aria-label="Tutup Undangan"
           >
-            <X className="h-5 w-5" strokeWidth={2} />
+            <X className="h-4 w-4" strokeWidth={2} />
           </button>
         ) : (
           <span />
@@ -59,7 +59,7 @@ export const TopControls: React.FC<TopControlsProps> = ({ onCloseInvitation, aut
         <button
           type="button"
           onClick={togglePlay}
-          className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-gold-400/40 bg-emerald-950/90 shadow-xl backdrop-blur-md transition-transform hover:scale-105 active:scale-95"
+          className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-gold-400/40 bg-emerald-950/90 shadow-xl backdrop-blur-md transition-transform hover:scale-105 active:scale-95"
           title={isPlaying ? 'Matikan Musik' : 'Putar Musik'}
           aria-label="Toggle Music"
         >
@@ -68,10 +68,10 @@ export const TopControls: React.FC<TopControlsProps> = ({ onCloseInvitation, aut
               animate={{ scale: [1, 1.18, 1] }}
               transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
             >
-              <Music className="h-5 w-5 text-gold-300" strokeWidth={1.75} />
+              <Music className="h-4 w-4 text-gold-300" strokeWidth={1.75} />
             </motion.span>
           ) : (
-            <Music className="relative z-10 h-5 w-5 text-stone-400" strokeWidth={1.75} />
+            <Music className="relative z-10 h-4 w-4 text-stone-400" strokeWidth={1.75} />
           )}
         </button>
       </motion.div>
