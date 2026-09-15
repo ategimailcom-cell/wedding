@@ -140,7 +140,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
           lang="ar"
           style={{
             fontFamily: "'Amiri', 'Scheherazade New', 'Traditional Arabic', serif",
-            fontSize: 'clamp(15px,4vw,20px)',
+            fontSize: 'clamp(17px,4.5vw,22px)',
             lineHeight: 1.4,
             color: '#111',
             marginBottom: 6,
@@ -154,7 +154,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
         <p
           style={{
             fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(8px,2.1vw,9.5px)',
+            fontSize: 'clamp(9px,2.3vw,10.5px)',
             lineHeight: 1.65,
             color: '#111',
             textAlign: 'center',
@@ -171,7 +171,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
         <p
           style={{
             fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(19px,5.2vw,24px)',
+            fontSize: 'clamp(21px,5.6vw,26px)',
             fontStyle: 'italic',
             fontWeight: 700,
             color: '#d4900a',
@@ -185,7 +185,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
         <p
           style={{
             fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(7.5px,2vw,9px)',
+            fontSize: 'clamp(8.5px,2.2vw,10px)',
             color: '#111',
             textAlign: 'center',
             marginBottom: 8,
@@ -209,7 +209,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
           <span
             style={{
               fontFamily: 'Georgia, serif',
-              fontSize: 'clamp(11px,3vw,13px)',
+              fontSize: 'clamp(12px,3.2vw,14px)',
               fontStyle: 'italic',
               color: '#1a1a1a',
               whiteSpace: 'nowrap',
@@ -224,7 +224,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
         <p
           style={{
             fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(19px,5.2vw,24px)',
+            fontSize: 'clamp(21px,5.6vw,26px)',
             fontStyle: 'italic',
             fontWeight: 700,
             color: '#d4900a',
@@ -238,7 +238,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
         <p
           style={{
             fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(7.5px,2vw,9px)',
+            fontSize: 'clamp(8.5px,2.2vw,10px)',
             color: '#111',
             textAlign: 'center',
             marginBottom: 10,
@@ -251,7 +251,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
         <p
           style={{
             fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(8px,2.1vw,9.5px)',
+            fontSize: 'clamp(9px,2.3vw,10.5px)',
             fontStyle: 'italic',
             color: '#111',
             textAlign: 'center',
@@ -289,7 +289,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
             <p
               style={{
                 fontFamily: 'Georgia, serif',
-                fontSize: 'clamp(8px,2.1vw,9.5px)',
+                fontSize: 'clamp(9px,2.3vw,10.5px)',
                 color: '#111',
                 lineHeight: 1.5,
               }}
@@ -319,7 +319,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
             <p
               style={{
                 fontFamily: 'Georgia, serif',
-                fontSize: 'clamp(8px,2.1vw,9.5px)',
+                fontSize: 'clamp(9px,2.3vw,10.5px)',
                 color: '#111',
                 lineHeight: 1.5,
               }}
@@ -335,7 +335,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
         <p
           style={{
             fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(13px,3.6vw,16px)',
+            fontSize: 'clamp(14px,3.8vw,17px)',
             fontWeight: 700,
             color: '#111',
             lineHeight: 1.3,
@@ -351,7 +351,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
         <p
           style={{
             fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(7.5px,2vw,9px)',
+            fontSize: 'clamp(8.5px,2.2vw,10px)',
             color: '#111',
             lineHeight: 1.6,
             textAlign: 'center',
@@ -367,7 +367,7 @@ export const InvitationCard: React.FC<{ className?: string }> = ({
         <p
           style={{
             fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(7.5px,2vw,9px)',
+            fontSize: 'clamp(8.5px,2.2vw,10px)',
             color: '#111',
             lineHeight: 1.65,
             textAlign: 'center',
