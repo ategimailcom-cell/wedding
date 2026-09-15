@@ -38,10 +38,10 @@ export const TopControls: React.FC<TopControlsProps> = ({ onCloseInvitation, aut
     <>
       <audio ref={audioRef} src="/music/pawestri.mp3" loop preload="auto" />
       <motion.div
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: -12, x: '-50%' }}
+        animate={{ opacity: 1, y: 0, x: '-50%' }}
         transition={{ delay: 0.4, duration: 0.4 }}
-        className="pointer-events-none fixed left-1/2 top-4 z-50 flex w-full max-w-[420px] -translate-x-1/2 items-start justify-between px-4"
+        className="pointer-events-none fixed left-1/2 top-4 z-50 flex w-full max-w-[420px] items-start justify-between px-4"
       >
         {onCloseInvitation ? (
           <button
