@@ -162,8 +162,8 @@ export const StorySection: React.FC<{ scrollContainer: React.RefObject<HTMLDivEl
                   {/* Kartu */}
                   <motion.div
                     className="min-w-0 flex-1"
-                    initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
-                    whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.35 }}
                     transition={{ duration: 0.55 }}
                   >

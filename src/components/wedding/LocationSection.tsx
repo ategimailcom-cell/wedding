@@ -56,8 +56,8 @@ export const LocationSection: React.FC = () => {
 
         {/* Kartu lokasi */}
         <motion.div
-          initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="parchment-card relative overflow-hidden rounded-[20px] border border-gold-400/50 p-5"
