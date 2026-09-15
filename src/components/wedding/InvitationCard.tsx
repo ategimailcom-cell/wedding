@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 /** Ornament scrollwork SVG — cermin kiri/kanan */
 const Flourish: React.FC<{ flip?: boolean }> = ({ flip = false }) => (
@@ -34,9 +33,8 @@ const Flourish: React.FC<{ flip?: boolean }> = ({ flip = false }) => (
 );
 
 /** Kartu undangan — cocok dengan desain cetak (6.png) */
-export const InvitationCard: React.FC<{ className?: string; active?: boolean }> = ({
+export const InvitationCard: React.FC<{ className?: string }> = ({
   className = '',
-  active = false,
 }) => {
   return (
     <div
@@ -123,14 +121,9 @@ export const InvitationCard: React.FC<{ className?: string; active?: boolean }> 
       {/* ══════════════════════════════════════
           KONTEN UTAMA
       ══════════════════════════════════════ */}
-      <motion.div
+      <div
         className="relative z-[10] flex h-full min-h-0 flex-col items-center"
         style={{ padding: '40px 20px', gap: 0, overflowY: 'auto' }}
-        initial={{ opacity: 0, y: 28, filter: 'blur(8px)' }}
-        animate={
-          active ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: 28, filter: 'blur(8px)' }
-        }
-        transition={{ duration: 0.8, ease: 'easeOut' }}
       >
         <div
           style={{
@@ -384,7 +377,7 @@ export const InvitationCard: React.FC<{ className?: string; active?: boolean }> 
           Keluarga Besar Sutrisno, Tri gatu, Tri Widyati, Faragita
         </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

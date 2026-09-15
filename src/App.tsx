@@ -52,7 +52,7 @@ export function App() {
 
   return (
     <div className="relative h-[100dvh] max-h-[100dvh] overflow-hidden overscroll-none bg-emerald-950 font-sans text-stone-800 selection:bg-gold-500/30 selection:text-gold-200">
-      <HeroSection active={isOpened} />
+      <HeroSection />
 
       <CoverModal
         isOpen={!isOpened}
