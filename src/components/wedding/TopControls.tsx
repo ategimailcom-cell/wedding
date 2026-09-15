@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Music } from 'lucide-react';
+import { X, Volume2, VolumeX } from 'lucide-react';
 
 interface TopControlsProps {
   onCloseInvitation?: () => void;
@@ -51,7 +51,7 @@ export const TopControls: React.FC<TopControlsProps> = ({ onCloseInvitation, aut
             title="Tutup Undangan"
             aria-label="Tutup Undangan"
           >
-            <Mail className="h-5 w-5" strokeWidth={1.75} />
+            <X className="h-5 w-5" strokeWidth={2} />
           </button>
         ) : (
           <span />
@@ -68,10 +68,10 @@ export const TopControls: React.FC<TopControlsProps> = ({ onCloseInvitation, aut
               animate={{ scale: [1, 1.18, 1] }}
               transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
             >
-              <Music className="h-5 w-5 text-gold-300" strokeWidth={1.75} />
+              <Volume2 className="h-5 w-5 text-gold-300" strokeWidth={1.75} />
             </motion.span>
           ) : (
-            <Music className="h-5 w-5 text-stone-400" strokeWidth={1.75} />
+            <VolumeX className="h-5 w-5 text-stone-400" strokeWidth={1.75} />
           )}
         </button>
       </motion.div>
